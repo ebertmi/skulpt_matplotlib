@@ -1,3 +1,4 @@
+/* eslint-disable */
 (function() {
   var out$ = typeof exports != 'undefined' && exports || this;
 
@@ -155,9 +156,9 @@
 
 
 /**
-	Made by Michael Ebert for skulpt, see this modules at https://github.com/waywaaard/skulpt
+  Made by Michael Ebert for skulpt, see this modules at https://github.com/waywaaard/skulpt
 
-	matplotlib.pyplot inspired by https://github.com/rameshvs/jsplotlib, though heavily modified.
+  matplotlib.pyplot inspired by https://github.com/rameshvs/jsplotlib, though heavily modified.
 
   jsplotlib for supporting plot commands and kwargs for the matplotlib skulpt module
   Supports:
@@ -207,8 +208,8 @@ jsplotlib.rc = {
 var chart_counter = 0; // for creating unique ids
 
 /** Line2D class for encapsulating all line relevant attributes and methods
-		Rebuilds partial matplotlib.Line2D functionality. Does not inherit from
-		abstract Artist class. Rather more a data representation.
+    Rebuilds partial matplotlib.Line2D functionality. Does not inherit from
+    abstract Artist class. Rather more a data representation.
  **/
 jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
   markersize, markeredgewidth, markeredgecolor, markerfacecolor,
@@ -239,10 +240,10 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
   that._markevery = markevery || null;
   //kwargs
 
-	// if only y provided, create Array from 1 to N
-	if (!that._x || that._x.length === 0) {
-		that._x = jsplotlib.linspace(1, that._y.length, that._y.length);
-	}
+  // if only y provided, create Array from 1 to N
+  if (!that._x || that._x.length === 0) {
+    that._x = jsplotlib.linspace(1, that._y.length, that._y.length);
+  }
 
   that.antialiased = function(a) {
     if (a)
@@ -397,9 +398,9 @@ jsplotlib.Line2D = function(xdata, ydata, linewidth, linestyle, color, marker,
             case 'marker':
               this.marker(val);
               break;
-						case 'markersize':
-							this.markersize(val);
-							break;
+            case 'markersize':
+              this.markersize(val);
+              break;
             case 'markeredgewidth':
               this.markeredgewidth(val);
               break;
@@ -1013,6 +1014,9 @@ jsplotlib.plot = function(chart) {
   that.draw = function() {
     var i;
 
+    // reset the current drawing if any
+    $("#" + chart.attr("id")).empty();
+
     this._init_common(); //
 
     // draw lines
@@ -1026,13 +1030,13 @@ jsplotlib.plot = function(chart) {
   that.update = function(kwargs) {
     var i;
 
-		// pass to lines
+    // pass to lines
     for (i = 0; i < this._lines.length; i++) {
       this._lines[i].update(kwargs);
     }
 
-		// update own kwargs
-		if (kwargs && typeof kwargs === "object") {
+    // update own kwargs
+    if (kwargs && typeof kwargs === "object") {
       for (var key in kwargs) {
         if (kwargs.hasOwnProperty(key)) {
           var val = kwargs[key];
@@ -1042,11 +1046,11 @@ jsplotlib.plot = function(chart) {
               this.title(val);
               break;
             case 'xlabel':
-							this.xlabel(val);
+              this.xlabel(val);
               break;
             case 'ylabel':
-							this.ylabel(val);
-							break;
+              this.ylabel(val);
+              break;
           }
         }
       }
@@ -1285,7 +1289,7 @@ jsplotlib.color_to_hex = function(color) {
   if(typeof color == "string") {
     var match = color.match(/^#(?:[0-9a-fA-F]{3}){1,2}$/);
     if (match && match.length === 1)
-			return match[0];
+      return match[0];
   }
 
   // add rgb colors here
@@ -1559,9 +1563,9 @@ values are ('-', 'b').  Example format strings include:
 
 .. seealso::
 
-	:func:`~matplotlib.Line2D.lineStyles` and
-	:func:`~matplotlib.pyplot.colors`
-		for all possible styles and color format string.
+  :func:`~matplotlib.Line2D.lineStyles` and
+  :func:`~matplotlib.pyplot.colors`
+    for all possible styles and color format string.
 **/
 jsplotlib._process_plot_format = function(fmt) {
   var linestyle = null;
@@ -1796,12 +1800,12 @@ var $builtinmodule = function(name) {
   var plot; // TODO, we should support multiple lines here
   var canvas;
 
-	// import numpy
-	var CLASS_NDARRAY = "numpy.ndarray"; // maybe make identifier accessible in numpy module
-	var np = Sk.importModule("numpy");
-	var ndarray_f = np['$d'].array.func_code;
-	var getitem_f = np['$d'][CLASS_NDARRAY]['__getitem__'].func_code;
-	var ndarray = Sk.misceval.callsim(np['$d'].array.func_code, new Sk.builtin.list([1,2,3,4]));
+  // import numpy
+  var CLASS_NDARRAY = "numpy.ndarray"; // maybe make identifier accessible in numpy module
+  var np = Sk.importModule("numpy");
+  var ndarray_f = np['$d'].array.func_code;
+  var getitem_f = np['$d'][CLASS_NDARRAY]['__getitem__'].func_code;
+  var ndarray = Sk.misceval.callsim(np['$d'].array.func_code, new Sk.builtin.list([1,2,3,4]));
 
   var create_chart = function() {
     /* test if Canvas ist available should be moved to create_chart function */
@@ -1835,11 +1839,11 @@ var $builtinmodule = function(name) {
     // or x1, y1, stylestring1, x2, y2, stylestring2
     // or ydata, stylestring
     /*
-			plot(x, y)        # plot x and y using default line style and color
-			plot(x, y, 'bo')  # plot x and y using blue circle markers
-			plot(y)           # plot y using x as index array 0..N-1
-			plot(y, 'r+')     # ditto, but with red plusses
-		*/
+      plot(x, y)        # plot x and y using default line style and color
+      plot(x, y, 'bo')  # plot x and y using blue circle markers
+      plot(y)           # plot y using x as index array 0..N-1
+      plot(y, 'r+')     # ditto, but with red plusses
+    */
 
     // variable definitions for args
     var xdata = []; // actually x and y data may contain multiple lines
@@ -1848,26 +1852,26 @@ var $builtinmodule = function(name) {
     var i = 0;
     var lines = 0;
     var xdata_not_ydata_flag = true;
-		var slice = new Sk.builtin.slice(0, undefined, 1); // getting complete first dimension of ndarray
+    var slice = new Sk.builtin.slice(0, undefined, 1); // getting complete first dimension of ndarray
 
     for (i = 0; i < args.length; i++) {
       if (args[i] instanceof Sk.builtin.list || Sk.abstr.typeName(args[i]) === CLASS_NDARRAY) {
-				// special treatment for ndarrays, though we allow basic lists too
-				var _unpacked;
-				if(Sk.abstr.typeName(args[i]) === CLASS_NDARRAY) {
-					// we get the first dimension, no 2-dim data
-					_unpacked = Sk.ffi.unwrapn(args[i]);
-					var first_dim_size = 0;
-					if(_unpacked && _unpacked.shape && _unpacked.shape[0]){
-						first_dim_size = _unpacked.shape[0];
-					} else {
-						throw new Sk.builtin.ValueError('args contain "' + CLASS_NDARRAY + '" without elements or malformed shape.');
-					}
-					_unpacked = _unpacked.buffer.slice(0, first_dim_size); // buffer array of first dimension
+        // special treatment for ndarrays, though we allow basic lists too
+        var _unpacked;
+        if(Sk.abstr.typeName(args[i]) === CLASS_NDARRAY) {
+          // we get the first dimension, no 2-dim data
+          _unpacked = Sk.ffi.unwrapn(args[i]);
+          var first_dim_size = 0;
+          if(_unpacked && _unpacked.shape && _unpacked.shape[0]){
+            first_dim_size = _unpacked.shape[0];
+          } else {
+            throw new Sk.builtin.ValueError('args contain "' + CLASS_NDARRAY + '" without elements or malformed shape.');
+          }
+          _unpacked = _unpacked.buffer.slice(0, first_dim_size); // buffer array of first dimension
           _unpacked = _unpacked.map(function(x) { return Sk.ffi.remapToJs(x);})
-				} else {
-					_unpacked = Sk.ffi.remapToJs(args[i]);
-				}
+        } else {
+          _unpacked = Sk.ffi.remapToJs(args[i]);
+        }
 
         // unwraps x and y, but no 2-dim-data
         if (xdata_not_ydata_flag) {
@@ -1903,9 +1907,9 @@ var $builtinmodule = function(name) {
     }
 
     /* handle special cases
-			only supplied y
-			only supplied 1 array and stylestring
-		*/
+      only supplied y
+      only supplied 1 array and stylestring
+    */
     if ((args.length === 1) || (args.length === 2 && (xdata.length === 1 &&
       ydata.length === 0))) {
       // only y supplied
@@ -1938,11 +1942,11 @@ var $builtinmodule = function(name) {
           'marker': jsplotlib.parse_marker(ftm_tuple.marker),
           'color': ftm_tuple.color
         });
-				plot.add_line(line);
+        plot.add_line(line);
       }
     } else {
-			throw new Sk.builtin.ValueError('Cannot parse given combination of "*args"!');
-		}
+      throw new Sk.builtin.ValueError('Cannot parse given combination of "*args"!');
+    }
 
     // set kwargs that apply for all lines
     plot.update(kwargs);
@@ -2012,7 +2016,7 @@ var $builtinmodule = function(name) {
 
     var label_unwrap = Sk.ffi.remapToJs(label);
 
-		create_chart();
+    create_chart();
     // create new plot instance, should be replaced with Line2D and then added to the plot
     if (!plot) {
       plot = jsplotlib.plot(chart);
@@ -2064,7 +2068,7 @@ var $builtinmodule = function(name) {
         "' is not supported for s.");
     }
 
-		create_chart();
+    create_chart();
     // create new plot instance, should be replaced with Line2D and then added to the plot
     if (!plot) {
       plot = jsplotlib.plot(chart);
@@ -2089,7 +2093,7 @@ var $builtinmodule = function(name) {
         "' is not supported for s.");
     }
 
-		create_chart();
+    create_chart();
     // create new plot instance, should be replaced with Line2D and then added to the plot
     if (!plot) {
       plot = jsplotlib.plot(chart);
