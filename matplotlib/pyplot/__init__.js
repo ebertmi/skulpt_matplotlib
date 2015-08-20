@@ -891,8 +891,8 @@ jsplotlib.plot = function(chart) {
 
   that._update_chart_ratio = function() {
       debugger;
-      var maxHeight = 480;
-      var maxWidth = 640;
+      var maxHeight = 600;
+      var maxWidth = 800;
 
       // save original values for recalculations
       if (!that._originalWidth || !that._originalHeight) {
@@ -1821,7 +1821,7 @@ var $builtinmodule = function(name) {
     if (!chart) {
       $('#' + Sk.canvas).empty();
       // min height and width
-      chart = jsplotlib.make_chart(450, 450, "#" + Sk.canvas);
+      chart = jsplotlib.make_chart(600, 600, "#" + Sk.canvas);
     }
   };
 
