@@ -889,9 +889,12 @@ jsplotlib.plot = function(chart) {
     return this;
   };
 
+  /**
+   * Simple chart ratio auto choosing function. Try to choose a best width/height
+   * ratio for the input values.
+   */
   that._update_chart_ratio = function() {
-      debugger;
-      var maxHeight = 600;
+      var maxHeight = 800;
       var maxWidth = 800;
 
       // save original values for recalculations
@@ -1456,15 +1459,15 @@ jsplotlib.construct_axis = function() {
         offset_label_h = parent_graph._yaxis._size + parent_graph._chartwidth /
           2;
         offset_label_v = parent_graph._height + this._size - this._label_offset;
-        this._writing_mode = "lr-tb";
+        this._writing_mode = "horizontal-tb";
         this._orientation = "bottom";
       } else if (this._x_or_y === "y") {
         offset_h = this._size;
         offset_v = 0;
         offset_label_h = this._label_offset;
         offset_label_v = parent_graph._chartheight / 2;
-        label_rotation = "rotate(180)";
-        this._writing_mode = "tb-rl";
+        label_rotation = "rotate(270)";
+        this._writing_mode = "vertical-rl";
         this._orientation = "left";
       } else {
         throw "Invalid axis type (must be x or y): " + this._x_or_y;
